@@ -478,5 +478,5 @@ $RECYCLE.BIN/
 
 # Test MVC app
 AuthenticationManager.TestApp
-.vscode/
-AuthenticationManager.sln
+src.sln
+.vscode
