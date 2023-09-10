@@ -26,7 +26,7 @@ namespace AuthenticationManager.Data.Context
             : base(options)
         {
         }
-
+        
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<UserRole>()
@@ -43,6 +43,14 @@ namespace AuthenticationManager.Data.Context
 
             builder.Entity<User>()
                 .ToTable("AM_Users");
+            
+            builder.Entity<User>()
+                .HasIndex(i => i.Username)
+                .IsUnique();
+
+            builder.Entity<User>()
+                .HasIndex(i => i.Email)
+                .IsUnique();
 
             builder.Entity<Role>()
                 .ToTable("AM_Roles");
