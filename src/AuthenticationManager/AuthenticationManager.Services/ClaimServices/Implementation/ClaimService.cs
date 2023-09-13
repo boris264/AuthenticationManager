@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using AuthenticationManager.Data.Models;
 using AuthenticationManager.Data.Repositories;
 using AuthenticationManager.Services.ClaimServices.Interfaces;
-using AuthenticationManager.Services.UserServices.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
@@ -17,15 +16,11 @@ namespace AuthenticationManager.Serivces.ClaimServices.Implementation
 
         private readonly ILogger<ClaimService> _logger;
 
-        private readonly IUserManager<User> _userManager;
-
         public ClaimService(IAuthManagerRepository repository,
-                            ILogger<ClaimService> logger,
-                            IUserManager<User> userManager)
+                            ILogger<ClaimService> logger)
         {
             _repository = repository;
             _logger = logger;
-            _userManager = userManager;
         }
 
         public async Task<Claim> GetByGuid(Guid guid)
@@ -73,7 +68,9 @@ namespace AuthenticationManager.Serivces.ClaimServices.Implementation
 
         public async Task AddClaimToUser(Claim claim, string username)
         {
-            User user = await _userManager.GetByUsernameAsync(username);
+            User user = await _repository.All<User>()
+                .Where(u => u.Username == username)
+                .FirstOrDefaultAsync();
 
             if (user != null)
             {
@@ -81,6 +78,15 @@ namespace AuthenticationManager.Serivces.ClaimServices.Implementation
                     User = user,
                     Claim = claim
                 });
+
+                try
+                {
+                    await _repository.SaveChangesAsync();
+                }
+                catch (DbUpdateException)
+                {
+                    _logger.LogCritical("Failed to add claim to the user!");
+                }
             }
         }
     }

@@ -8,6 +8,7 @@ using AuthenticationManager.Data.Models;
 using AuthenticationManager.Data.Repositories;
 using AuthenticationManager.Services.Authentication.Constants;
 using AuthenticationManager.Services.Authentication.PasswordHashers.Interfaces;
+using AuthenticationManager.Services.ClaimServices.Interfaces;
 using AuthenticationManager.Services.UserServices.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
@@ -27,15 +28,19 @@ namespace AuthenticationManager.Services.UserServices.Implementation
 
         private readonly ILogger<UserManager<TUser>> _logger;
 
+        private readonly IClaimService _claimService;
+
         public UserManager(IAuthManagerRepository repository,
                            IPasswordHasher passwordHasher,
                            ILogger<UserManager<TUser>> logger,
-                           IHttpContextAccessor httpContextAccessor)
+                           IHttpContextAccessor httpContextAccessor,
+                           IClaimService claimService)
         {
             _repository = repository;
             _passwordHasher = passwordHasher;
             _logger = logger;
             _httpContextAccessor = httpContextAccessor;
+            _claimService = claimService;
         }
 
         public Task<TUser> GetByEmailAsync(string email)
@@ -64,6 +69,15 @@ namespace AuthenticationManager.Services.UserServices.Implementation
             {
                 await _repository.SaveChangesAsync();
                 authenticationResult.Result = AuthenticationState.Success;
+
+                await _claimService.AddClaimToUser(new Data.Models.Claim() {
+                    Name = "Username",
+                    Value = user.Username
+                }, newUser.Username);
+                await _claimService.AddClaimToUser(new Data.Models.Claim() {
+                    Name = "Email",
+                    Value = user.Email
+                }, newUser.Username);
             }
             catch (DbUpdateException)
             {
@@ -83,7 +97,7 @@ namespace AuthenticationManager.Services.UserServices.Implementation
             {
                 if (_passwordHasher.VerifyPassword(user.Password, password))
                 {
-                    SetUser(user);
+                    await SetUser(user);
 
                     authenticationResult.Result = AuthenticationState.Success;
                     return authenticationResult;
@@ -99,7 +113,7 @@ namespace AuthenticationManager.Services.UserServices.Implementation
             return authenticationResult;
         }
 
-        private bool SetUser(TUser user)
+        private async Task SetUser(TUser user)
         {
             if (user != null)
             {
@@ -107,7 +121,9 @@ namespace AuthenticationManager.Services.UserServices.Implementation
                 
                 try
                 {
-                    foreach (var claim in user.UserClaims.Select(x => x.Claim))
+                    var userClaims = await _claimService.GetUserClaims(user.Username);
+
+                    foreach (var claim in userClaims)
                     {
                         userIdentity.AddClaim(new System.Security.Claims.Claim(claim.Name, claim.Value));
                     }
@@ -115,16 +131,12 @@ namespace AuthenticationManager.Services.UserServices.Implementation
                     ClaimsPrincipal userClaimsPrincipal = new ClaimsPrincipal(userIdentity);
 
                     _httpContextAccessor.HttpContext.User = userClaimsPrincipal;
-
-                    return true;
                 }
                 catch (ArgumentNullException)
                 {
                     _logger.LogError("User is null!");
                 }
             }
-
-            return false;
         }
     }
 }

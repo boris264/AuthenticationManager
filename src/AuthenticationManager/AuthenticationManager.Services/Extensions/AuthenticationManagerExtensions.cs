@@ -8,6 +8,7 @@ using AuthenticationManager.Services.Authentication.PasswordHashers.Interfaces;
 using AuthenticationManager.Services.Cache.Distributed;
 using AuthenticationManager.Services.ClaimServices.Interfaces;
 using AuthenticationManager.Services.Middlewares;
+using AuthenticationManager.Services.Options;
 using AuthenticationManager.Services.UserServices.Implementation;
 using AuthenticationManager.Services.UserServices.Interfaces;
 using Microsoft.AspNetCore.Builder;
@@ -21,7 +22,8 @@ namespace AuthenticationManager.Services.Extensions
     {
         public static IServiceCollection AddAuthenticationManager<TContext, TUser>(
             this IServiceCollection services, 
-            Action<DbContextOptionsBuilder> options)
+            Action<DbContextOptionsBuilder> options,
+            Action<SessionCookieOptions> sessionCookieOptions = null)
             where TContext : AuthenticationManagerDbContext<TUser>
             where TUser : User
         {
@@ -31,6 +33,11 @@ namespace AuthenticationManager.Services.Extensions
             services.AddScoped<IClaimService, ClaimService>();
 
             services.AddDbContext<TContext>(options);
+            
+            if (sessionCookieOptions != null)
+            {
+                services.Configure(sessionCookieOptions);
+            }
 
             return services;
         }
