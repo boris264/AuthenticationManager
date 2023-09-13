@@ -7,6 +7,8 @@ using AuthenticationManager.Services.Authentication.PasswordHashers.Implementati
 using AuthenticationManager.Services.Authentication.PasswordHashers.Interfaces;
 using AuthenticationManager.Services.Cache.Distributed;
 using AuthenticationManager.Services.ClaimServices.Interfaces;
+using AuthenticationManager.Services.Implementation;
+using AuthenticationManager.Services.Interfaces;
 using AuthenticationManager.Services.Middlewares;
 using AuthenticationManager.Services.Options;
 using AuthenticationManager.Services.UserServices.Implementation;
@@ -31,6 +33,7 @@ namespace AuthenticationManager.Services.Extensions
             services.AddScoped<IUserManager<TUser>, UserManager<TUser>>();
             services.AddScoped<IPasswordHasher, BCryptPasswordHasher>();
             services.AddScoped<IClaimService, ClaimService>();
+            services.AddScoped<IRoleService, RoleService>();
 
             services.AddDbContext<TContext>(options);
             

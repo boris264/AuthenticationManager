@@ -25,6 +25,16 @@ namespace AuthenticationManager.Services.Implementation
         public async Task<OperationResult> AddRole(string role)
         {
             OperationResult operationResult = new OperationResult();
+            bool roleExists = await _repository.All<Role>()
+                .Where(r => r.Name == role)
+                .AnyAsync();
+            
+            if (roleExists)
+            {
+                operationResult.AddError("Role already exists!");
+                return operationResult;
+            }
+
             await _repository.AddAsync(new Role() {
                 Name = role
             });
@@ -61,6 +71,16 @@ namespace AuthenticationManager.Services.Implementation
             if (r == null)
             {
                 operationResult.AddError($"Role {role} doesn't exist!");
+                return operationResult;
+            }
+
+            UserRole userRole = await _repository.All<UserRole>()
+                .Where(ur => ur.RoleId == r.Id && ur.UserId == user.Id)
+                .FirstOrDefaultAsync();
+            
+            if (userRole != null)
+            {
+                operationResult.AddError($"User {user.Username} is already in role {r.Name}!");
                 return operationResult;
             }
 
