@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AuthenticationManager.Data.Models;
 using AuthenticationManager.Data.Repositories;
 using AuthenticationManager.Services.ClaimServices.Interfaces;
+using AuthenticationManager.Services.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
@@ -44,50 +45,52 @@ namespace AuthenticationManager.Serivces.ClaimServices.Implementation
                 .ToListAsync();
         }
 
-        public async Task AddClaimToUser(Claim claim, Guid userId)
+        public async Task<OperationResult> AddClaimToUser(Claim claim, Guid userId)
         {
             User user = await _repository.FindByGuidAsync<User>(userId);
-
-            if (user != null)
-            {
-                user.UserClaims.Add(new UserClaim() {
-                    User = user,
-                    Claim = claim
-                });
-
-                try
-                {
-                    await _repository.SaveChangesAsync();
-                }
-                catch (DbUpdateException)
-                {
-                    _logger.LogCritical("Failed to add claim to the user!");
-                }
-            }
+            OperationResult result = await AddClaim(claim, user);
+            
+            return result;
         }
 
-        public async Task AddClaimToUser(Claim claim, string username)
+        public async Task<OperationResult> AddClaimToUser(Claim claim, string username)
         {
             User user = await _repository.All<User>()
                 .Where(u => u.Username == username)
                 .FirstOrDefaultAsync();
 
-            if (user != null)
-            {
-                user.UserClaims.Add(new UserClaim() {
-                    User = user,
-                    Claim = claim
-                });
+            OperationResult result = await AddClaim(claim, user);
 
-                try
-                {
-                    await _repository.SaveChangesAsync();
-                }
-                catch (DbUpdateException)
-                {
-                    _logger.LogCritical("Failed to add claim to the user!");
-                }
+            return result;
+        }
+
+        private async Task<OperationResult> AddClaim(Claim claim, User user)
+        {
+            OperationResult operationResult = new OperationResult();
+
+            if (user == null)
+            {
+                operationResult.AddError("User was not found!");
+                return operationResult;
             }
+
+            user.UserClaims.Add(new UserClaim()
+            {
+                User = user,
+                Claim = claim
+            });
+
+            try
+            {
+                await _repository.SaveChangesAsync();
+                operationResult.Success = true;
+            }
+            catch (DbUpdateException)
+            {
+                operationResult.AddError("Failed to add claim to the user!");
+            }
+
+            return operationResult;
         }
     }
 }
