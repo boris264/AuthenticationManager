@@ -1,18 +1,18 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using AuthenticationManager.Authentication.Common;
-using AuthenticationManager.Data.Context;
 using AuthenticationManager.Data.Models;
 using AuthenticationManager.Data.Repositories;
 using AuthenticationManager.Services.Authentication.Constants;
 using AuthenticationManager.Services.Authentication.PasswordHashers.Interfaces;
 using AuthenticationManager.Services.ClaimServices.Interfaces;
+using AuthenticationManager.Services.Common;
 using AuthenticationManager.Services.UserServices.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.Extensions.Logging;
 
 namespace AuthenticationManager.Services.UserServices.Implementation
@@ -70,14 +70,12 @@ namespace AuthenticationManager.Services.UserServices.Implementation
                 await _repository.SaveChangesAsync();
                 authenticationResult.Result = AuthenticationState.Success;
 
-                await _claimService.AddClaimToUser(new Data.Models.Claim() {
-                    Name = "Username",
-                    Value = user.Username
-                }, newUser.Username);
-                await _claimService.AddClaimToUser(new Data.Models.Claim() {
-                    Name = "Email",
-                    Value = user.Email
-                }, newUser.Username);
+                List<Data.Models.Claim> claims = new List<Data.Models.Claim>() {
+                    new Data.Models.Claim() { Name = ClaimNames.Username, Value = newUser.Username},
+                    new Data.Models.Claim() { Name = ClaimNames.Email, Value = newUser.Email}
+                };
+
+                await _claimService.AddClaimsToUser(claims, newUser.Username);
             }
             catch (DbUpdateException)
             {

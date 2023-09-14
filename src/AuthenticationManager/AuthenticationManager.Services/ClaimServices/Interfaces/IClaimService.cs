@@ -11,6 +11,10 @@ namespace AuthenticationManager.Services.ClaimServices.Interfaces
         public Task<OperationResult> AddClaimToUser(Claim claim, string username);
 
         public Task<OperationResult> AddClaimToUser(Claim claim, Guid userId);
+        
+        public Task<OperationResult> AddClaimsToUser(IEnumerable<Claim> claims, string username);
+
+        public Task<OperationResult> AddClaimsToUser(IEnumerable<Claim> claims, Guid userId);
 
         public Task<Claim> GetByGuid(Guid guid);
 

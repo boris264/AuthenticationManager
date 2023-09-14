@@ -48,9 +48,8 @@ namespace AuthenticationManager.Serivces.ClaimServices.Implementation
         public async Task<OperationResult> AddClaimToUser(Claim claim, Guid userId)
         {
             User user = await _repository.FindByGuidAsync<User>(userId);
-            OperationResult result = await AddClaim(claim, user);
-            
-            return result;
+
+            return await AddClaim(claim, user);
         }
 
         public async Task<OperationResult> AddClaimToUser(Claim claim, string username)
@@ -59,9 +58,53 @@ namespace AuthenticationManager.Serivces.ClaimServices.Implementation
                 .Where(u => u.Username == username)
                 .FirstOrDefaultAsync();
 
-            OperationResult result = await AddClaim(claim, user);
+            return await AddClaim(claim, user);
+        }
 
-            return result;
+        public async Task<OperationResult> AddClaimsToUser(IEnumerable<Claim> claims, string username)
+        {
+            User user = await _repository.All<User>()
+                .Where(u => u.Username == username)
+                .FirstOrDefaultAsync();
+
+            return await AddClaims(claims, user);
+        }
+
+        public async Task<OperationResult> AddClaimsToUser(IEnumerable<Claim> claims, Guid userId)
+        {
+            User user = await _repository.FindByGuidAsync<User>(userId);
+
+            return await AddClaims(claims, user);
+        }
+
+        private async Task<OperationResult> AddClaims(IEnumerable<Claim> claims, User user)
+        {
+            OperationResult operationResult = new OperationResult();
+
+            var userClaims = await GetUserClaims(user.Username);
+
+            claims = claims
+                .Where(c => userClaims.All(uc => c.Name != uc.Name && c.Value != uc.Value))
+                .ToList();
+
+            await _repository.AddRangeAsync(claims
+                .Select(uc => new UserClaim() {
+                        User = user,
+                        Claim = uc
+                    }
+                ).ToList());
+
+            try
+            {
+                await _repository.SaveChangesAsync();
+                operationResult.Success = true;
+            }
+            catch (DbUpdateException dbu)
+            {
+                operationResult.AddError($"Failed to add claims to the user! Exception: {dbu.Message}");
+            }
+
+            return operationResult;
         }
 
         private async Task<OperationResult> AddClaim(Claim claim, User user)
@@ -74,7 +117,7 @@ namespace AuthenticationManager.Serivces.ClaimServices.Implementation
                 return operationResult;
             }
 
-            user.UserClaims.Add(new UserClaim()
+            await _repository.AddAsync(new UserClaim()
             {
                 User = user,
                 Claim = claim
