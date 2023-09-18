@@ -25,7 +25,7 @@ namespace AuthenticationManager.Services.Extensions
         public static IServiceCollection AddAuthenticationManager<TContext, TUser>(
             this IServiceCollection services, 
             Action<DbContextOptionsBuilder> options,
-            Action<SessionCookieOptions> sessionCookieOptions = null)
+            Action<SessionCookieOptions> sessionCookieOptions = default)
             where TContext : AuthenticationManagerDbContext<TUser>
             where TUser : User
         {
@@ -34,6 +34,8 @@ namespace AuthenticationManager.Services.Extensions
             services.AddScoped<IPasswordHasher, BCryptPasswordHasher>();
             services.AddScoped<IClaimService, ClaimService>();
             services.AddScoped<IRoleService, RoleService>();
+            services.AddScoped<IUserValidator<TUser>, UserValidator<TUser>>();
+            services.AddScoped<IPasswordValidator, PasswordValidator>();
 
             services.AddDbContext<TContext>(options);
             

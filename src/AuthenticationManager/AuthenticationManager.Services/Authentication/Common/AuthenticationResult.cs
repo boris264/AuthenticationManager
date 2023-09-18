@@ -13,6 +13,6 @@ namespace AuthenticationManager.Authentication.Common
     {
         public AuthenticationState Result { get; set; } = AuthenticationState.Failure;
 
-        public ICollection<string> ErrorMessages { get; } = new List<string>();
+        public List<string> ErrorMessages { get; } = new List<string>();
     }
 }

@@ -10,6 +10,7 @@ using AuthenticationManager.Services.Authentication.Constants;
 using AuthenticationManager.Services.Authentication.PasswordHashers.Interfaces;
 using AuthenticationManager.Services.ClaimServices.Interfaces;
 using AuthenticationManager.Services.Common;
+using AuthenticationManager.Services.Interfaces;
 using AuthenticationManager.Services.UserServices.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
@@ -29,18 +30,25 @@ namespace AuthenticationManager.Services.UserServices.Implementation
         private readonly ILogger<UserManager<TUser>> _logger;
 
         private readonly IClaimService _claimService;
+        private readonly IUserValidator<TUser> _userValidator;
+
+        private readonly IPasswordValidator _passwordValidator;
 
         public UserManager(IAuthManagerRepository repository,
                            IPasswordHasher passwordHasher,
                            ILogger<UserManager<TUser>> logger,
                            IHttpContextAccessor httpContextAccessor,
-                           IClaimService claimService)
+                           IClaimService claimService,
+                           IUserValidator<TUser> userValidator,
+                           IPasswordValidator passwordValidator)
         {
             _repository = repository;
             _passwordHasher = passwordHasher;
             _logger = logger;
             _httpContextAccessor = httpContextAccessor;
             _claimService = claimService;
+            _userValidator = userValidator;
+            _passwordValidator = passwordValidator;
         }
 
         public Task<TUser> GetByEmailAsync(string email)
@@ -61,6 +69,26 @@ namespace AuthenticationManager.Services.UserServices.Implementation
         {
             AuthenticationResult authenticationResult = new();
             TUser newUser = user;
+
+            OperationResult userValidationResult = _userValidator.ValidateUser(newUser);
+
+            if (!userValidationResult.Success)
+            {
+                authenticationResult.ErrorMessages.AddRange(userValidationResult.ErrorMessages);
+                authenticationResult.Result = AuthenticationState.Failure;
+
+                return authenticationResult;
+            }
+
+            OperationResult passwordValidationResult = _passwordValidator.ValidatePassword(newUser.Password);
+
+            if (!passwordValidationResult.Success)
+            {
+                authenticationResult.ErrorMessages.AddRange(passwordValidationResult.ErrorMessages);
+                authenticationResult.Result = AuthenticationState.Failure;
+
+                return authenticationResult;
+            }
 
             newUser.Password = _passwordHasher.Hash(newUser.Password);
             await _repository.AddAsync(newUser);

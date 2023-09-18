@@ -4,13 +4,18 @@ namespace AuthenticationManager.Services.Common
 {
     public class OperationResult
     {
-        public bool Success { get; set; } = false;
+        public bool Success { get; private set; } = true;
 
         public List<string> ErrorMessages { get; private set; } = new List<string>();
 
-        public void AddError(string errorMessage)
+        public void Invalid(string errorMessage = default)
         {
-            this.ErrorMessages.Add(errorMessage);
+            Success = false;
+            
+            if (!string.IsNullOrEmpty(errorMessage))
+            {
+                ErrorMessages.Add(errorMessage);
+            }
         }
     }
 }

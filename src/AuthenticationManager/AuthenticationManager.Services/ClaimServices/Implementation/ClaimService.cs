@@ -96,12 +96,11 @@ namespace AuthenticationManager.Serivces.ClaimServices.Implementation
 
             try
             {
-                await _repository.SaveChangesAsync();
-                operationResult.Success = true;
+                await _repository.SaveChangesAsync();               
             }
             catch (DbUpdateException dbu)
             {
-                operationResult.AddError($"Failed to add claims to the user! Exception: {dbu.Message}");
+                operationResult.Invalid($"Failed to add claims to the user! Exception: {dbu.Message}");
             }
 
             return operationResult;
@@ -113,7 +112,7 @@ namespace AuthenticationManager.Serivces.ClaimServices.Implementation
 
             if (user == null)
             {
-                operationResult.AddError("User was not found!");
+                operationResult.Invalid("User was not found!");
                 return operationResult;
             }
 
@@ -125,12 +124,11 @@ namespace AuthenticationManager.Serivces.ClaimServices.Implementation
 
             try
             {
-                await _repository.SaveChangesAsync();
-                operationResult.Success = true;
+                await _repository.SaveChangesAsync();                
             }
             catch (DbUpdateException)
             {
-                operationResult.AddError("Failed to add claim to the user!");
+                operationResult.Invalid("Failed to add claim to the user!");
             }
 
             return operationResult;

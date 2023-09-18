@@ -31,7 +31,7 @@ namespace AuthenticationManager.Services.Implementation
             
             if (roleExists)
             {
-                operationResult.AddError("Role already exists!");
+                operationResult.Invalid("Role already exists!");
                 return operationResult;
             }
 
@@ -42,11 +42,11 @@ namespace AuthenticationManager.Services.Implementation
             try
             {
                 await _repository.SaveChangesAsync();
-                operationResult.Success = true;
+                
             }
             catch (DbUpdateException dbUpdateException)
             {
-                operationResult.AddError($"Failed to add role! Exception: {dbUpdateException.Message}");
+                operationResult.Invalid($"Failed to add role! Exception: {dbUpdateException.Message}");
             }
 
             return operationResult;
@@ -62,7 +62,7 @@ namespace AuthenticationManager.Services.Implementation
             
             if (user == null)
             {
-                operationResult.AddError($"User {username} was not found!");
+                operationResult.Invalid($"User {username} was not found!");
                 return operationResult;
             }
 
@@ -70,7 +70,7 @@ namespace AuthenticationManager.Services.Implementation
 
             if (r == null)
             {
-                operationResult.AddError($"Role {role} doesn't exist!");
+                operationResult.Invalid($"Role {role} doesn't exist!");
                 return operationResult;
             }
 
@@ -80,7 +80,7 @@ namespace AuthenticationManager.Services.Implementation
             
             if (userRole != null)
             {
-                operationResult.AddError($"User {user.Username} is already in role {r.Name}!");
+                operationResult.Invalid($"User {user.Username} is already in role {r.Name}!");
                 return operationResult;
             }
 
@@ -91,12 +91,11 @@ namespace AuthenticationManager.Services.Implementation
 
             try
             {
-                await _repository.SaveChangesAsync();
-                operationResult.Success = true;
+                await _repository.SaveChangesAsync();                
             }
             catch (DbUpdateException dbUpdateException)
             {
-                operationResult.AddError($"Failed to add user to role! Exception: {dbUpdateException.Message}");
+                operationResult.Invalid($"Failed to add user to role! Exception: {dbUpdateException.Message}");
             }
 
             return operationResult;
