@@ -52,6 +52,17 @@ namespace AuthenticationManager.DataGenerator
                                            int usersToGenerate)
         {
             List<User> generatedUsers = new List<User>();
+            Role administratorRole = new Role()
+            { 
+                Id = Guid.NewGuid(), 
+                Name = "Administrator"
+            };
+            Role userRole = new Role()
+            { 
+                Id = Guid.NewGuid(), 
+                Name = "User"
+            };
+
 
             for (int i = 0; i < usersToGenerate; i++)
             {
@@ -96,11 +107,7 @@ namespace AuthenticationManager.DataGenerator
                 user.UserRoles = new List<UserRole>() 
                 {
                     new UserRole() {
-                        Role = new Role() 
-                        { 
-                            Id = Guid.NewGuid(), 
-                            Name = random.Next(10) < 2 ? "Administrator" : "User"
-                        },
+                        Role = random.Next(10) < 2 ? administratorRole : userRole,
                         UserId = user.Id,
                         RoleId = default
                     },
