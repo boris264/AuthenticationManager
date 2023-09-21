@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using AuthenticationManager.Authentication.Common;
 using AuthenticationManager.Data.Models;
 using AuthenticationManager.Serivces.ClaimServices.Implementation;
+using AuthenticationManager.Services.Authentication.Constants;
 using AuthenticationManager.Services.Authentication.PasswordHashers.Implementation;
 using AuthenticationManager.Services.Implementation;
 using AuthenticationManager.Services.Options.User;
@@ -25,6 +27,8 @@ namespace AuthenticationManager.Tests.UnitTests
         public void OneTimeSetUp()
         {
             _httpContextAccessor = new HttpContextAccessor();
+            _httpContextAccessor.HttpContext = new DefaultHttpContext();
+
             _userManager = new UserManager<User>(RepositoryContainer.repository, 
                                                  new BCryptPasswordHasher(),
                                                  null,
@@ -32,6 +36,12 @@ namespace AuthenticationManager.Tests.UnitTests
                                                  new ClaimService(RepositoryContainer.repository, null),
                                                  new UserValidator<User>(Options.Create(new UsernameOptions()), Options.Create(new EmailOptions())),
                                                  new PasswordValidator(Options.Create(new PasswordOptions())));
+        }
+
+        [SetUp]
+        public void SetUp()
+        {
+            _httpContextAccessor.HttpContext = new DefaultHttpContext();
         }
 
         [Test]
@@ -163,6 +173,59 @@ namespace AuthenticationManager.Tests.UnitTests
 
             Assert.That(userFromRepository.Password, Is.EqualTo(user.Password));
             Assert.That(userFromRepository.Password, Is.Not.EqualTo("John1234"));
+        }
+
+        [Test]
+        public async Task CheckLoginIsSuccessfull()
+        {
+            var loginResult = await _userManager.SignInAsync("Latime", "qbkgkybh");
+
+            Assert.That(loginResult.Result, Is.EqualTo(AuthenticationState.Success));
+        }
+
+        [Test]
+        public async Task CheckLoginFails()
+        {
+            var loginResult = await _userManager.SignInAsync("invalid", "awdwdawda");
+
+            Assert.That(loginResult.Result, Is.EqualTo(AuthenticationState.Failure));
+            Assert.That(loginResult.ErrorMessages.Contains(string.Format("invalid", LoginErrorConstants.UserNotFound)));
+        }
+
+        [Test]
+        public async Task CheckLoginFailReturnsCorrectMessageOnInvalidPassword()
+        {
+            var loginResult = await _userManager.SignInAsync("Latime", "awdwdawda");
+
+            Assert.That(loginResult.Result, Is.EqualTo(AuthenticationState.Failure));
+            Assert.That(loginResult.ErrorMessages.Contains(LoginErrorConstants.InvalidPassword));
+        }
+
+        [Test]
+        public async Task CheckHttpContextUserIsSetAfterLogin()
+        {
+            var loginResult = await _userManager.SignInAsync("Latime", "qbkgkybh");
+
+            Assert.That(loginResult.Result, Is.EqualTo(AuthenticationState.Success));
+            Assert.That(_httpContextAccessor.HttpContext.User, Is.Not.Null);
+            Assert.That(_httpContextAccessor.HttpContext.User.Identity.IsAuthenticated);
+        }
+
+        [Test]
+        public async Task CheckHttpContextUserIsAuthenticatedNotSetAfterFailedLogin()
+        {
+            var loginResult = await _userManager.SignInAsync("jtyjyttr", "dawfesajyyjt");
+
+            Assert.That(loginResult.Result, Is.EqualTo(AuthenticationState.Failure));
+            Assert.That(!_httpContextAccessor.HttpContext.User.Identity.IsAuthenticated);
+        }
+
+        [Test]
+        public async Task CheckUserClaimsAreAddedToHttpContextUser()
+        {
+            var loginResult = await _userManager.SignInAsync("Latime", "qbkgkybh");
+
+            Assert.That(_httpContextAccessor.HttpContext.User.Claims.Count(), Is.EqualTo(2));
         }
     }
 }

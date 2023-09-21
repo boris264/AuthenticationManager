@@ -10,6 +10,7 @@ using System.IO;
 using System.Text.Json;
 using MockQueryable.NSubstitute;
 using System.Text.Json.Serialization;
+using AuthenticationManager.Services.Authentication.PasswordHashers.Implementation;
 
 namespace AuthenticationManager.Tests.UnitTests
 {
@@ -29,6 +30,7 @@ namespace AuthenticationManager.Tests.UnitTests
         {
             repository = Substitute.For<IAuthManagerRepository>();
             await ParseUsersJson();
+            // HashUsersPasswords();
             ParseRolesFromUsers();
             ParseClaimsFromUsers();
             ConfigureMethodAll();
@@ -78,6 +80,8 @@ namespace AuthenticationManager.Tests.UnitTests
                 .Do(f => Remove(f.ArgAt<Role>(0)));
             repository.When(r => r.Remove<Claim>(Arg.Any<Claim>()))
                 .Do(f => Remove(f.ArgAt<Claim>(0)));
+            repository.When(r => r.Remove<UserClaim>(Arg.Any<UserClaim>()))
+                .Do(f => Remove(f.ArgAt<UserClaim>(0)));
         }
 
         private static Task AddRange<T>(ICollection<T> values)
@@ -130,6 +134,30 @@ namespace AuthenticationManager.Tests.UnitTests
             {
                 _claims.Remove(entity as Claim);
             }
+            else if (typeof(T) == typeof(UserClaim))
+            {
+                var userClaim = entity as UserClaim;
+
+                var user = FindByGuid<User>(userClaim.User.Id);
+
+                var uc = user.UserClaims
+                    .Where(uc => uc.Claim.Id == userClaim.Claim.Id)
+                    .FirstOrDefault();
+                
+                user.UserClaims.Remove(uc);
+            }
+            else if (typeof(T) == typeof(UserRole))
+            {
+                var userRole = entity as UserRole;
+
+                var user = FindByGuid<User>(userRole.User.Id);
+                
+                var ur = user.UserRoles
+                    .Where(uc => uc.Role.Id == userRole.Role.Id)
+                    .FirstOrDefault();
+                
+                user.UserRoles.Remove(ur);
+            }
         }
 
         private static T FindByGuid<T>(Guid guid)
@@ -170,8 +198,11 @@ namespace AuthenticationManager.Tests.UnitTests
 
         private static Task AddUserClaim(UserClaim userClaim)
         {
-            var user = _users.Where(u => u.Id == userClaim.UserId)
+            var user = _users.Where(u => u.Id == userClaim.User.Id)
                 .FirstOrDefault();
+
+            userClaim.ClaimId = userClaim.Claim.Id;
+            userClaim.UserId = userClaim.User.Id;
             
             if (user != null)
             {
@@ -201,6 +232,16 @@ namespace AuthenticationManager.Tests.UnitTests
 
             Stream usersJsonStream = File.Open("users.json", FileMode.Open);
             _users = await JsonSerializer.DeserializeAsync<List<User>>(usersJsonStream, jsonSerializerOptions);
+        }
+
+        private static void HashUsersPasswords()
+        {
+            BCryptPasswordHasher bCryptPasswordHasher = new();
+
+            foreach (var user in _users)
+            {
+                user.Password = bCryptPasswordHasher.Hash(user.Password);
+            }
         }
 
         private static void ParseRolesFromUsers()
