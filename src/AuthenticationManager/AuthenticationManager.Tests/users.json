@@ -1,0 +1,992 @@
+[
+  {
+    "Id": "ad766f82-6d24-4d0e-87f3-66059017c278",
+    "Username": "Shayerwi",
+    "Email": "elta_hilll@hotmail.com",
+    "Password": "etJuFNZn",
+    "UserClaims": [
+      {
+        "UserId": "ad766f82-6d24-4d0e-87f3-66059017c278",
+        "Claim": {
+          "Id": "be1b64b2-7f5c-424d-81ba-e94f5312d381",
+          "Name": "Username",
+          "Value": "Shayerwi"
+        }
+      },
+      {
+        "UserId": "ad766f82-6d24-4d0e-87f3-66059017c278",
+        "Claim": {
+          "Id": "65c35a2a-7d57-49a4-8d95-c4b61e4b878d",
+          "Name": "Email",
+          "Value": "elta_hilll@hotmail.com"
+        }
+      }
+    ],
+    "UserRoles": [
+      {
+        "UserId": "ad766f82-6d24-4d0e-87f3-66059017c278",
+        "Role": {
+          "Id": "3227a379-58be-477a-a01c-6564fc014891",
+          "Name": "User"
+        }
+      }
+    ]
+  },
+  {
+    "Id": "cda1d942-9912-4f93-b7f2-09092b00961d",
+    "Username": "TruckTalent",
+    "Email": "cristobal_macgyver@hotmail.com",
+    "Password": "P{8r5j{B",
+    "UserClaims": [
+      {
+        "UserId": "cda1d942-9912-4f93-b7f2-09092b00961d",
+        "Claim": {
+          "Id": "6425db21-f8b8-4d0c-a89f-50ef09f81fc1",
+          "Name": "Username",
+          "Value": "TruckTalent"
+        }
+      },
+      {
+        "UserId": "cda1d942-9912-4f93-b7f2-09092b00961d",
+        "Claim": {
+          "Id": "35f07c68-3a8b-4ca5-b29b-c2210bbfbd5d",
+          "Name": "Email",
+          "Value": "cristobal_macgyver@hotmail.com"
+        }
+      }
+    ],
+    "UserRoles": [
+      {
+        "UserId": "cda1d942-9912-4f93-b7f2-09092b00961d",
+        "Role": {
+          "Id": "3227a379-58be-477a-a01c-6564fc014891",
+          "Name": "User"
+        }
+      }
+    ]
+  },
+  {
+    "Id": "dd1cfe9a-2ba8-4229-b310-1029d8852caa",
+    "Username": "Blazent",
+    "Email": "rosanna85@yahoo.com",
+    "Password": "zA[_8}JW",
+    "UserClaims": [
+      {
+        "UserId": "dd1cfe9a-2ba8-4229-b310-1029d8852caa",
+        "Claim": {
+          "Id": "6f452e3c-ae09-49aa-92ee-e282c36c2d3d",
+          "Name": "Username",
+          "Value": "Blazent"
+        }
+      },
+      {
+        "UserId": "dd1cfe9a-2ba8-4229-b310-1029d8852caa",
+        "Claim": {
+          "Id": "6cf9f905-8af5-469a-8950-fca1edc6020e",
+          "Name": "Email",
+          "Value": "rosanna85@yahoo.com"
+        }
+      }
+    ],
+    "UserRoles": [
+      {
+        "UserId": "dd1cfe9a-2ba8-4229-b310-1029d8852caa",
+        "Role": {
+          "Id": "3227a379-58be-477a-a01c-6564fc014891",
+          "Name": "User"
+        }
+      }
+    ]
+  },
+  {
+    "Id": "2bb6aec7-4a03-4fac-a7bc-cab48b9e16c6",
+    "Username": "Boaoint",
+    "Email": "valerie4@yahoo.com",
+    "Password": "mhwmkaun",
+    "UserClaims": [
+      {
+        "UserId": "2bb6aec7-4a03-4fac-a7bc-cab48b9e16c6",
+        "Claim": {
+          "Id": "a6d0eec9-d4ee-4e05-9820-13d79020e600",
+          "Name": "Username",
+          "Value": "Boaoint"
+        }
+      },
+      {
+        "UserId": "2bb6aec7-4a03-4fac-a7bc-cab48b9e16c6",
+        "Claim": {
+          "Id": "309f0d82-28fe-4440-82c0-042a7f039f4d",
+          "Name": "Email",
+          "Value": "valerie4@yahoo.com"
+        }
+      }
+    ],
+    "UserRoles": [
+      {
+        "UserId": "2bb6aec7-4a03-4fac-a7bc-cab48b9e16c6",
+        "Role": {
+          "Id": "3227a379-58be-477a-a01c-6564fc014891",
+          "Name": "User"
+        }
+      }
+    ]
+  },
+  {
+    "Id": "bf6048e2-c1fd-46de-8478-4ba452514d05",
+    "Username": "Stylished",
+    "Email": "ryann54@gmail.com",
+    "Password": "Kr5=La",
+    "UserClaims": [
+      {
+        "UserId": "bf6048e2-c1fd-46de-8478-4ba452514d05",
+        "Claim": {
+          "Id": "e2b601b3-2462-4405-8e94-068fc9e405cd",
+          "Name": "Username",
+          "Value": "Stylished"
+        }
+      },
+      {
+        "UserId": "bf6048e2-c1fd-46de-8478-4ba452514d05",
+        "Claim": {
+          "Id": "30b1b906-8b88-42de-b463-bc2585db42eb",
+          "Name": "Email",
+          "Value": "ryann54@gmail.com"
+        }
+      }
+    ],
+    "UserRoles": [
+      {
+        "UserId": "bf6048e2-c1fd-46de-8478-4ba452514d05",
+        "Role": {
+          "Id": "3227a379-58be-477a-a01c-6564fc014891",
+          "Name": "User"
+        }
+      }
+    ]
+  },
+  {
+    "Id": "16d2da9f-ba98-412c-a70c-efeda6bbb3f3",
+    "Username": "ThedevilPure",
+    "Email": "cielo_rowe36@gmail.com",
+    "Password": "XcN3Lwjq",
+    "UserClaims": [
+      {
+        "UserId": "16d2da9f-ba98-412c-a70c-efeda6bbb3f3",
+        "Claim": {
+          "Id": "d755e28b-eb47-41ad-bf48-917a2aafe7ef",
+          "Name": "Username",
+          "Value": "ThedevilPure"
+        }
+      },
+      {
+        "UserId": "16d2da9f-ba98-412c-a70c-efeda6bbb3f3",
+        "Claim": {
+          "Id": "c8193942-dfc1-4951-8939-3d4bdadcefb9",
+          "Name": "Email",
+          "Value": "cielo_rowe36@gmail.com"
+        }
+      }
+    ],
+    "UserRoles": [
+      {
+        "UserId": "16d2da9f-ba98-412c-a70c-efeda6bbb3f3",
+        "Role": {
+          "Id": "3227a379-58be-477a-a01c-6564fc014891",
+          "Name": "User"
+        }
+      }
+    ]
+  },
+  {
+    "Id": "681d19bb-ef26-4a58-9090-7a934e806712",
+    "Username": "Lojassi",
+    "Email": "zora21@hotmail.com",
+    "Password": "*LUuW3",
+    "UserClaims": [
+      {
+        "UserId": "681d19bb-ef26-4a58-9090-7a934e806712",
+        "Claim": {
+          "Id": "d5de182b-c088-41c0-a067-f41bf0dc3586",
+          "Name": "Username",
+          "Value": "Lojassi"
+        }
+      },
+      {
+        "UserId": "681d19bb-ef26-4a58-9090-7a934e806712",
+        "Claim": {
+          "Id": "4d0158d8-bb3b-47ba-8962-46bd17013ebd",
+          "Name": "Email",
+          "Value": "zora21@hotmail.com"
+        }
+      }
+    ],
+    "UserRoles": [
+      {
+        "UserId": "681d19bb-ef26-4a58-9090-7a934e806712",
+        "Role": {
+          "Id": "3227a379-58be-477a-a01c-6564fc014891",
+          "Name": "User"
+        }
+      }
+    ]
+  },
+  {
+    "Id": "0efcfbaf-d9c9-4bb5-b08b-72761196a702",
+    "Username": "Techbyza",
+    "Email": "electa.wolf@gmail.com",
+    "Password": "eX5vKwvR",
+    "UserClaims": [
+      {
+        "UserId": "0efcfbaf-d9c9-4bb5-b08b-72761196a702",
+        "Claim": {
+          "Id": "7539dae4-b419-4231-aae4-756c58be2ce0",
+          "Name": "Username",
+          "Value": "Techbyza"
+        }
+      },
+      {
+        "UserId": "0efcfbaf-d9c9-4bb5-b08b-72761196a702",
+        "Claim": {
+          "Id": "90a8a324-e815-4275-b47b-b77ad4f6f26d",
+          "Name": "Email",
+          "Value": "electa.wolf@gmail.com"
+        }
+      }
+    ],
+    "UserRoles": [
+      {
+        "UserId": "0efcfbaf-d9c9-4bb5-b08b-72761196a702",
+        "Role": {
+          "Id": "3227a379-58be-477a-a01c-6564fc014891",
+          "Name": "User"
+        }
+      }
+    ]
+  },
+  {
+    "Id": "659fcf60-9081-40ee-99cd-ca59b48f46ae",
+    "Username": "LudaReggae",
+    "Email": "lisette.daniel@hotmail.com",
+    "Password": "!u9Svx",
+    "UserClaims": [
+      {
+        "UserId": "659fcf60-9081-40ee-99cd-ca59b48f46ae",
+        "Claim": {
+          "Id": "c27f8253-6c23-4d86-abcc-979690747f2a",
+          "Name": "Username",
+          "Value": "LudaReggae"
+        }
+      },
+      {
+        "UserId": "659fcf60-9081-40ee-99cd-ca59b48f46ae",
+        "Claim": {
+          "Id": "6345f74a-0fc9-40d8-99b4-10efb409f006",
+          "Name": "Email",
+          "Value": "lisette.daniel@hotmail.com"
+        }
+      }
+    ],
+    "UserRoles": [
+      {
+        "UserId": "659fcf60-9081-40ee-99cd-ca59b48f46ae",
+        "Role": {
+          "Id": "3227a379-58be-477a-a01c-6564fc014891",
+          "Name": "User"
+        }
+      }
+    ]
+  },
+  {
+    "Id": "f2902867-0c61-4a8e-a026-6baf965c6489",
+    "Username": "GameMedia",
+    "Email": "ayana.larson@gmail.com",
+    "Password": "rztcsmje",
+    "UserClaims": [
+      {
+        "UserId": "f2902867-0c61-4a8e-a026-6baf965c6489",
+        "Claim": {
+          "Id": "2cc92404-d3af-4b2a-ac2a-b5da34fb02bd",
+          "Name": "Username",
+          "Value": "GameMedia"
+        }
+      },
+      {
+        "UserId": "f2902867-0c61-4a8e-a026-6baf965c6489",
+        "Claim": {
+          "Id": "6a519e95-8082-42f2-bee0-dd0f900c3e2c",
+          "Name": "Email",
+          "Value": "ayana.larson@gmail.com"
+        }
+      }
+    ],
+    "UserRoles": [
+      {
+        "UserId": "f2902867-0c61-4a8e-a026-6baf965c6489",
+        "Role": {
+          "Id": "3227a379-58be-477a-a01c-6564fc014891",
+          "Name": "User"
+        }
+      }
+    ]
+  },
+  {
+    "Id": "d736c5fa-b3dc-4085-94b4-ef80a6d5250b",
+    "Username": "Jinri",
+    "Email": "ova.doyle89@gmail.com",
+    "Password": "hbuzmced",
+    "UserClaims": [
+      {
+        "UserId": "d736c5fa-b3dc-4085-94b4-ef80a6d5250b",
+        "Claim": {
+          "Id": "fae34c3c-fc1a-4fb8-aa74-309f55744323",
+          "Name": "Username",
+          "Value": "Jinri"
+        }
+      },
+      {
+        "UserId": "d736c5fa-b3dc-4085-94b4-ef80a6d5250b",
+        "Claim": {
+          "Id": "7615f953-26dd-4e07-8f93-65772e2719ab",
+          "Name": "Email",
+          "Value": "ova.doyle89@gmail.com"
+        }
+      }
+    ],
+    "UserRoles": [
+      {
+        "UserId": "d736c5fa-b3dc-4085-94b4-ef80a6d5250b",
+        "Role": {
+          "Id": "3227a379-58be-477a-a01c-6564fc014891",
+          "Name": "User"
+        }
+      }
+    ]
+  },
+  {
+    "Id": "99a36ec7-b656-4572-8134-c34c2781aa2e",
+    "Username": "Latime",
+    "Email": "kobe.tillman65@gmail.com",
+    "Password": "QEFDnzKf",
+    "UserClaims": [
+      {
+        "UserId": "99a36ec7-b656-4572-8134-c34c2781aa2e",
+        "Claim": {
+          "Id": "d07d841e-527e-42cf-93b4-b765d7690af5",
+          "Name": "Username",
+          "Value": "Latime"
+        }
+      },
+      {
+        "UserId": "99a36ec7-b656-4572-8134-c34c2781aa2e",
+        "Claim": {
+          "Id": "0101b980-ed7b-4d8c-836f-2c480e60bb32",
+          "Name": "Email",
+          "Value": "kobe.tillman65@gmail.com"
+        }
+      }
+    ],
+    "UserRoles": [
+      {
+        "UserId": "99a36ec7-b656-4572-8134-c34c2781aa2e",
+        "Role": {
+          "Id": "3227a379-58be-477a-a01c-6564fc014891",
+          "Name": "User"
+        }
+      }
+    ]
+  },
+  {
+    "Id": "d0e1b07f-5fc3-4c73-8a85-7bfa0dd6ff19",
+    "Username": "Scoobyte",
+    "Email": "zander.huels@hotmail.com",
+    "Password": "k2uNB6J6",
+    "UserClaims": [
+      {
+        "UserId": "d0e1b07f-5fc3-4c73-8a85-7bfa0dd6ff19",
+        "Claim": {
+          "Id": "3192e811-d8df-4e77-a668-b4e18b1a2dfd",
+          "Name": "Username",
+          "Value": "Scoobyte"
+        }
+      },
+      {
+        "UserId": "d0e1b07f-5fc3-4c73-8a85-7bfa0dd6ff19",
+        "Claim": {
+          "Id": "990022a2-7cd1-4bde-8a0d-9d27cc4ae617",
+          "Name": "Email",
+          "Value": "zander.huels@hotmail.com"
+        }
+      }
+    ],
+    "UserRoles": [
+      {
+        "UserId": "d0e1b07f-5fc3-4c73-8a85-7bfa0dd6ff19",
+        "Role": {
+          "Id": "3227a379-58be-477a-a01c-6564fc014891",
+          "Name": "User"
+        }
+      }
+    ]
+  },
+  {
+    "Id": "a963310a-efcd-40e5-ab16-327655e33461",
+    "Username": "Safravia",
+    "Email": "karianne4@gmail.com",
+    "Password": "qbkgkybh",
+    "UserClaims": [
+      {
+        "UserId": "a963310a-efcd-40e5-ab16-327655e33461",
+        "Claim": {
+          "Id": "429062fd-513d-4d4d-bef7-8ec9b8dc5a02",
+          "Name": "Username",
+          "Value": "Safravia"
+        }
+      },
+      {
+        "UserId": "a963310a-efcd-40e5-ab16-327655e33461",
+        "Claim": {
+          "Id": "ccf5d219-6d8a-4446-9192-ee7d973a5c10",
+          "Name": "Email",
+          "Value": "karianne4@gmail.com"
+        }
+      }
+    ],
+    "UserRoles": [
+      {
+        "UserId": "a963310a-efcd-40e5-ab16-327655e33461",
+        "Role": {
+          "Id": "3227a379-58be-477a-a01c-6564fc014891",
+          "Name": "User"
+        }
+      }
+    ]
+  },
+  {
+    "Id": "c48312d0-914d-49d4-bd2d-530ca7628d59",
+    "Username": "ZoomPhreek",
+    "Email": "charley88@yahoo.com",
+    "Password": "a7)Try3.",
+    "UserClaims": [
+      {
+        "UserId": "c48312d0-914d-49d4-bd2d-530ca7628d59",
+        "Claim": {
+          "Id": "f14c75d1-5130-4030-9ac0-eea3c0f27ba9",
+          "Name": "Username",
+          "Value": "ZoomPhreek"
+        }
+      },
+      {
+        "UserId": "c48312d0-914d-49d4-bd2d-530ca7628d59",
+        "Claim": {
+          "Id": "f77609a5-e8fd-4b5a-a593-7ee1bc68a3f1",
+          "Name": "Email",
+          "Value": "charley88@yahoo.com"
+        }
+      }
+    ],
+    "UserRoles": [
+      {
+        "UserId": "c48312d0-914d-49d4-bd2d-530ca7628d59",
+        "Role": {
+          "Id": "3227a379-58be-477a-a01c-6564fc014891",
+          "Name": "User"
+        }
+      }
+    ]
+  },
+  {
+    "Id": "a8768c9d-d850-49c4-8861-1742e6fcb719",
+    "Username": "WebRock",
+    "Email": "bryana42@hotmail.com",
+    "Password": "3kSCFcL\u003E",
+    "UserClaims": [
+      {
+        "UserId": "a8768c9d-d850-49c4-8861-1742e6fcb719",
+        "Claim": {
+          "Id": "cc71d0a1-ca5c-4e7c-aef1-ff43853b7061",
+          "Name": "Username",
+          "Value": "WebRock"
+        }
+      },
+      {
+        "UserId": "a8768c9d-d850-49c4-8861-1742e6fcb719",
+        "Claim": {
+          "Id": "e3de2aaa-13fe-4eba-8fcb-290847116a97",
+          "Name": "Email",
+          "Value": "bryana42@hotmail.com"
+        }
+      }
+    ],
+    "UserRoles": [
+      {
+        "UserId": "a8768c9d-d850-49c4-8861-1742e6fcb719",
+        "Role": {
+          "Id": "3227a379-58be-477a-a01c-6564fc014891",
+          "Name": "User"
+        }
+      }
+    ]
+  },
+  {
+    "Id": "022bd6cc-d26b-4dbe-91bf-77cd93274208",
+    "Username": "Mobilg",
+    "Email": "ewald.reynolds74@yahoo.com",
+    "Password": "9xM!(8",
+    "UserClaims": [
+      {
+        "UserId": "022bd6cc-d26b-4dbe-91bf-77cd93274208",
+        "Claim": {
+          "Id": "62da7493-7e6d-4513-a266-385828d54ac5",
+          "Name": "Username",
+          "Value": "Mobilg"
+        }
+      },
+      {
+        "UserId": "022bd6cc-d26b-4dbe-91bf-77cd93274208",
+        "Claim": {
+          "Id": "7f50ade9-d7c2-4e72-9486-e8c2bea9cbfd",
+          "Name": "Email",
+          "Value": "ewald.reynolds74@yahoo.com"
+        }
+      }
+    ],
+    "UserRoles": [
+      {
+        "UserId": "022bd6cc-d26b-4dbe-91bf-77cd93274208",
+        "Role": {
+          "Id": "3227a379-58be-477a-a01c-6564fc014891",
+          "Name": "User"
+        }
+      }
+    ]
+  },
+  {
+    "Id": "d81e42fa-4779-4e2d-b895-f6b823550075",
+    "Username": "BabyJournal",
+    "Email": "adolfo_tremblay21@hotmail.com",
+    "Password": "98w26?Dg",
+    "UserClaims": [
+      {
+        "UserId": "d81e42fa-4779-4e2d-b895-f6b823550075",
+        "Claim": {
+          "Id": "cf3a5e77-31d7-4751-b66d-905b85bb0b04",
+          "Name": "Username",
+          "Value": "BabyJournal"
+        }
+      },
+      {
+        "UserId": "d81e42fa-4779-4e2d-b895-f6b823550075",
+        "Claim": {
+          "Id": "b033e2dd-fb5a-4127-b03f-6cdb5723201a",
+          "Name": "Email",
+          "Value": "adolfo_tremblay21@hotmail.com"
+        }
+      }
+    ],
+    "UserRoles": [
+      {
+        "UserId": "d81e42fa-4779-4e2d-b895-f6b823550075",
+        "Role": {
+          "Id": "2c24aaee-ae2f-478d-8193-5afe5532ccaa",
+          "Name": "Administrator"
+        }
+      }
+    ]
+  },
+  {
+    "Id": "4f6179d6-5aa2-49d2-8286-a53e994ea4cd",
+    "Username": "Dakkometi",
+    "Email": "august92@gmail.com",
+    "Password": "2!Zd^b=U",
+    "UserClaims": [
+      {
+        "UserId": "4f6179d6-5aa2-49d2-8286-a53e994ea4cd",
+        "Claim": {
+          "Id": "83578c70-bb7e-496a-8ad9-71091b49c355",
+          "Name": "Username",
+          "Value": "Dakkometi"
+        }
+      },
+      {
+        "UserId": "4f6179d6-5aa2-49d2-8286-a53e994ea4cd",
+        "Claim": {
+          "Id": "4809d13d-feba-45ef-8af8-06fe62cc422e",
+          "Name": "Email",
+          "Value": "august92@gmail.com"
+        }
+      }
+    ],
+    "UserRoles": [
+      {
+        "UserId": "4f6179d6-5aa2-49d2-8286-a53e994ea4cd",
+        "Role": {
+          "Id": "3227a379-58be-477a-a01c-6564fc014891",
+          "Name": "User"
+        }
+      }
+    ]
+  },
+  {
+    "Id": "2714f5a6-3cfc-4a0e-9fc6-7e0d2251a97b",
+    "Username": "Raeic",
+    "Email": "kaylin_kuhn@gmail.com",
+    "Password": "jX5AB^9r",
+    "UserClaims": [
+      {
+        "UserId": "2714f5a6-3cfc-4a0e-9fc6-7e0d2251a97b",
+        "Claim": {
+          "Id": "05971ae1-9353-43bf-976a-95abba3d39fe",
+          "Name": "Username",
+          "Value": "Raeic"
+        }
+      },
+      {
+        "UserId": "2714f5a6-3cfc-4a0e-9fc6-7e0d2251a97b",
+        "Claim": {
+          "Id": "31c20858-d5bc-43ab-9f97-c56e7d4521e9",
+          "Name": "Email",
+          "Value": "kaylin_kuhn@gmail.com"
+        }
+      }
+    ],
+    "UserRoles": [
+      {
+        "UserId": "2714f5a6-3cfc-4a0e-9fc6-7e0d2251a97b",
+        "Role": {
+          "Id": "2c24aaee-ae2f-478d-8193-5afe5532ccaa",
+          "Name": "Administrator"
+        }
+      }
+    ]
+  },
+  {
+    "Id": "b53b223b-ad77-4148-a563-9a579ae5cef4",
+    "Username": "FeistyBigg",
+    "Email": "jaylin_dietrich@hotmail.com",
+    "Password": "jgevfnhp",
+    "UserClaims": [
+      {
+        "UserId": "b53b223b-ad77-4148-a563-9a579ae5cef4",
+        "Claim": {
+          "Id": "1e4f0791-8218-4217-97c2-6d49f63d69cb",
+          "Name": "Username",
+          "Value": "FeistyBigg"
+        }
+      },
+      {
+        "UserId": "b53b223b-ad77-4148-a563-9a579ae5cef4",
+        "Claim": {
+          "Id": "89c41344-8d9c-40cc-8f1d-a46fde032e4b",
+          "Name": "Email",
+          "Value": "jaylin_dietrich@hotmail.com"
+        }
+      }
+    ],
+    "UserRoles": [
+      {
+        "UserId": "b53b223b-ad77-4148-a563-9a579ae5cef4",
+        "Role": {
+          "Id": "2c24aaee-ae2f-478d-8193-5afe5532ccaa",
+          "Name": "Administrator"
+        }
+      }
+    ]
+  },
+  {
+    "Id": "9d7f0c6a-ba04-4af6-8b43-fef6b92edf07",
+    "Username": "EliteGoofy",
+    "Email": "olga_kilback49@yahoo.com",
+    "Password": "SHLvXTWZ",
+    "UserClaims": [
+      {
+        "UserId": "9d7f0c6a-ba04-4af6-8b43-fef6b92edf07",
+        "Claim": {
+          "Id": "007f0523-f56c-4b9e-9b9f-b3cee0775f9e",
+          "Name": "Username",
+          "Value": "EliteGoofy"
+        }
+      },
+      {
+        "UserId": "9d7f0c6a-ba04-4af6-8b43-fef6b92edf07",
+        "Claim": {
+          "Id": "ef58fd38-7d53-45e4-9edb-2950c9d7b33b",
+          "Name": "Email",
+          "Value": "olga_kilback49@yahoo.com"
+        }
+      }
+    ],
+    "UserRoles": [
+      {
+        "UserId": "9d7f0c6a-ba04-4af6-8b43-fef6b92edf07",
+        "Role": {
+          "Id": "3227a379-58be-477a-a01c-6564fc014891",
+          "Name": "User"
+        }
+      }
+    ]
+  },
+  {
+    "Id": "d8c7521b-7b33-4fdc-85b3-ba1506053d1d",
+    "Username": "Carndre",
+    "Email": "zoe_bashirian3@hotmail.com",
+    "Password": "8mGHgZW3",
+    "UserClaims": [
+      {
+        "UserId": "d8c7521b-7b33-4fdc-85b3-ba1506053d1d",
+        "Claim": {
+          "Id": "70359a59-f366-4740-a988-abcffe481678",
+          "Name": "Username",
+          "Value": "Carndre"
+        }
+      },
+      {
+        "UserId": "d8c7521b-7b33-4fdc-85b3-ba1506053d1d",
+        "Claim": {
+          "Id": "da389034-f502-4d21-a71b-69a93c3a2e79",
+          "Name": "Email",
+          "Value": "zoe_bashirian3@hotmail.com"
+        }
+      }
+    ],
+    "UserRoles": [
+      {
+        "UserId": "d8c7521b-7b33-4fdc-85b3-ba1506053d1d",
+        "Role": {
+          "Id": "3227a379-58be-477a-a01c-6564fc014891",
+          "Name": "User"
+        }
+      }
+    ]
+  },
+  {
+    "Id": "2242dddf-24c6-4433-8e97-5ca68f3b8854",
+    "Username": "Breezenm",
+    "Email": "aliyah.hickle48@gmail.com",
+    "Password": "wbHSJmuW",
+    "UserClaims": [
+      {
+        "UserId": "2242dddf-24c6-4433-8e97-5ca68f3b8854",
+        "Claim": {
+          "Id": "bac599ea-fe11-4b3e-bbee-72c0549a744b",
+          "Name": "Username",
+          "Value": "Breezenm"
+        }
+      },
+      {
+        "UserId": "2242dddf-24c6-4433-8e97-5ca68f3b8854",
+        "Claim": {
+          "Id": "44d1fecd-9b19-452a-ab84-fb6b88e891f8",
+          "Name": "Email",
+          "Value": "aliyah.hickle48@gmail.com"
+        }
+      }
+    ],
+    "UserRoles": [
+      {
+        "UserId": "2242dddf-24c6-4433-8e97-5ca68f3b8854",
+        "Role": {
+          "Id": "3227a379-58be-477a-a01c-6564fc014891",
+          "Name": "User"
+        }
+      }
+    ]
+  },
+  {
+    "Id": "244b8525-eaf7-4216-9feb-f040b7b32bd7",
+    "Username": "Danceria",
+    "Email": "margarett60@yahoo.com",
+    "Password": "^8\u003EpcZSa",
+    "UserClaims": [
+      {
+        "UserId": "244b8525-eaf7-4216-9feb-f040b7b32bd7",
+        "Claim": {
+          "Id": "130585e0-085d-42d2-8ebb-372c47554ad2",
+          "Name": "Username",
+          "Value": "Danceria"
+        }
+      },
+      {
+        "UserId": "244b8525-eaf7-4216-9feb-f040b7b32bd7",
+        "Claim": {
+          "Id": "ed4158c4-fd73-4148-a0ff-abae10f31b96",
+          "Name": "Email",
+          "Value": "margarett60@yahoo.com"
+        }
+      }
+    ],
+    "UserRoles": [
+      {
+        "UserId": "244b8525-eaf7-4216-9feb-f040b7b32bd7",
+        "Role": {
+          "Id": "2c24aaee-ae2f-478d-8193-5afe5532ccaa",
+          "Name": "Administrator"
+        }
+      }
+    ]
+  },
+  {
+    "Id": "6d0c22f8-9630-49b6-9e82-0d2d2b8cd4ba",
+    "Username": "WayMegs",
+    "Email": "prudence.fahey28@yahoo.com",
+    "Password": "\u002B6!AM\u0026Qt",
+    "UserClaims": [
+      {
+        "UserId": "6d0c22f8-9630-49b6-9e82-0d2d2b8cd4ba",
+        "Claim": {
+          "Id": "8fe10f0f-8085-4993-ad57-b3ae088bada8",
+          "Name": "Username",
+          "Value": "WayMegs"
+        }
+      },
+      {
+        "UserId": "6d0c22f8-9630-49b6-9e82-0d2d2b8cd4ba",
+        "Claim": {
+          "Id": "180185c3-9a6b-47e4-96bf-da878798d21e",
+          "Name": "Email",
+          "Value": "prudence.fahey28@yahoo.com"
+        }
+      }
+    ],
+    "UserRoles": [
+      {
+        "UserId": "6d0c22f8-9630-49b6-9e82-0d2d2b8cd4ba",
+        "Role": {
+          "Id": "2c24aaee-ae2f-478d-8193-5afe5532ccaa",
+          "Name": "Administrator"
+        }
+      }
+    ]
+  },
+  {
+    "Id": "180fd3d1-1ad2-40b6-8e35-e254d4a637da",
+    "Username": "MajorSpice",
+    "Email": "spencer.dicki72@hotmail.com",
+    "Password": "J=pg3Z@^",
+    "UserClaims": [
+      {
+        "UserId": "180fd3d1-1ad2-40b6-8e35-e254d4a637da",
+        "Claim": {
+          "Id": "bbbaa1b2-ea2d-4fac-be97-80984c71f1d4",
+          "Name": "Username",
+          "Value": "MajorSpice"
+        }
+      },
+      {
+        "UserId": "180fd3d1-1ad2-40b6-8e35-e254d4a637da",
+        "Claim": {
+          "Id": "130ce7d0-8bba-4eb3-ba91-9d09ccb80cf3",
+          "Name": "Email",
+          "Value": "spencer.dicki72@hotmail.com"
+        }
+      }
+    ],
+    "UserRoles": [
+      {
+        "UserId": "180fd3d1-1ad2-40b6-8e35-e254d4a637da",
+        "Role": {
+          "Id": "3227a379-58be-477a-a01c-6564fc014891",
+          "Name": "User"
+        }
+      }
+    ]
+  },
+  {
+    "Id": "9a489c4c-00e7-472f-8a0e-a469729f9b7a",
+    "Username": "AloneElement",
+    "Email": "nicholaus.toy@gmail.com",
+    "Password": "fsSCSpwk",
+    "UserClaims": [
+      {
+        "UserId": "9a489c4c-00e7-472f-8a0e-a469729f9b7a",
+        "Claim": {
+          "Id": "a3a28850-e71e-449c-b2c8-e75f3d85a82a",
+          "Name": "Username",
+          "Value": "AloneElement"
+        }
+      },
+      {
+        "UserId": "9a489c4c-00e7-472f-8a0e-a469729f9b7a",
+        "Claim": {
+          "Id": "1e4a5640-f40b-4995-bfca-e88004e4711d",
+          "Name": "Email",
+          "Value": "nicholaus.toy@gmail.com"
+        }
+      }
+    ],
+    "UserRoles": [
+      {
+        "UserId": "9a489c4c-00e7-472f-8a0e-a469729f9b7a",
+        "Role": {
+          "Id": "3227a379-58be-477a-a01c-6564fc014891",
+          "Name": "User"
+        }
+      }
+    ]
+  },
+  {
+    "Id": "6268cc0c-8364-4505-90e4-65afc8c65804",
+    "Username": "StargalDev",
+    "Email": "stuart_stiedemann@gmail.com",
+    "Password": "YnsTRQ7x",
+    "UserClaims": [
+      {
+        "UserId": "6268cc0c-8364-4505-90e4-65afc8c65804",
+        "Claim": {
+          "Id": "11f6aaaa-642f-4ed5-9cf2-465858e4ea73",
+          "Name": "Username",
+          "Value": "StargalDev"
+        }
+      },
+      {
+        "UserId": "6268cc0c-8364-4505-90e4-65afc8c65804",
+        "Claim": {
+          "Id": "92540d2d-140f-459b-a6ce-c08425c98e14",
+          "Name": "Email",
+          "Value": "stuart_stiedemann@gmail.com"
+        }
+      }
+    ],
+    "UserRoles": [
+      {
+        "UserId": "6268cc0c-8364-4505-90e4-65afc8c65804",
+        "Role": {
+          "Id": "3227a379-58be-477a-a01c-6564fc014891",
+          "Name": "User"
+        }
+      }
+    ]
+  },
+  {
+    "Id": "b8a829fd-f2dd-426b-b2a0-66ae67dcee39",
+    "Username": "CartTuch",
+    "Email": "darien_wiegand23@hotmail.com",
+    "Password": "-V7Kt-",
+    "UserClaims": [
+      {
+        "UserId": "b8a829fd-f2dd-426b-b2a0-66ae67dcee39",
+        "Claim": {
+          "Id": "e273c6d8-0d59-4450-b956-3298f5453023",
+          "Name": "Username",
+          "Value": "CartTuch"
+        }
+      },
+      {
+        "UserId": "b8a829fd-f2dd-426b-b2a0-66ae67dcee39",
+        "Claim": {
+          "Id": "537a5698-c96c-4426-95c9-b0c99a78bc3d",
+          "Name": "Email",
+          "Value": "darien_wiegand23@hotmail.com"
+        }
+      }
+    ],
+    "UserRoles": [
+      {
+        "UserId": "b8a829fd-f2dd-426b-b2a0-66ae67dcee39",
+        "Role": {
+          "Id": "3227a379-58be-477a-a01c-6564fc014891",
+          "Name": "User"
+        }
+      }
+    ]
+  }
+]
