@@ -21,6 +21,12 @@ namespace AuthenticationManager.Services.Implementation
         {
             OperationResult operationResult = new();
 
+            if (string.IsNullOrEmpty(password))
+            {
+                operationResult.Invalid("Password cannot be null!");
+                return operationResult;
+            }
+
             if (!CheckPasswordLength(password))
             {
                 operationResult.Invalid($"Password should be atleast {_passwordOptions.MinimumLength} characters long!");

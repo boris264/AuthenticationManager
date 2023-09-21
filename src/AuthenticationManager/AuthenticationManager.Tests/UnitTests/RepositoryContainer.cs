@@ -8,6 +8,8 @@ using NSubstitute;
 using NUnit.Framework;
 using System.IO;
 using System.Text.Json;
+using MockQueryable.NSubstitute;
+using System.Text.Json.Serialization;
 
 namespace AuthenticationManager.Tests.UnitTests
 {
@@ -29,7 +31,6 @@ namespace AuthenticationManager.Tests.UnitTests
             await ParseUsersJson();
             ParseRolesFromUsers();
             ParseClaimsFromUsers();
-
             ConfigureMethodAll();
             ConfigureMethodAdd();
             ConfigureMethodFindByGuid();
@@ -44,6 +45,10 @@ namespace AuthenticationManager.Tests.UnitTests
             repository.AddAsync(Arg.Any<Role>()).Returns(r => AddRole(r.ArgAt<Role>(0)));
             repository.AddAsync(Arg.Any<UserClaim>()).Returns(r => AddUserClaim(r.ArgAt<UserClaim>(0)));
             repository.AddAsync(Arg.Any<UserRole>()).Returns(r => AddUserRole(r.ArgAt<UserRole>(0)));
+            repository.AddRangeAsync(Arg.Any<ICollection<User>>()).Returns(u => AddRange(u.ArgAt<ICollection<User>>(0)));
+            repository.AddRangeAsync(Arg.Any<ICollection<Role>>()).Returns(u => AddRange(u.ArgAt<ICollection<Role>>(0)));
+            repository.AddRangeAsync(Arg.Any<ICollection<UserRole>>()).Returns(u => AddRange(u.ArgAt<ICollection<UserRole>>(0)));
+            repository.AddRangeAsync(Arg.Any<ICollection<UserClaim>>()).Returns(u => AddRange(u.ArgAt<ICollection<UserClaim>>(0)));
         }
 
         private static void ConfigureMethodFindByGuid()
@@ -58,11 +63,11 @@ namespace AuthenticationManager.Tests.UnitTests
 
         private static void ConfigureMethodAll()
         {
-            repository.All<User>().Returns(_users.AsQueryable());
-            repository.All<Role>().Returns(_roles.AsQueryable());
-            repository.All<Claim>().Returns(_claims.AsQueryable());
-            repository.All<UserClaim>().Returns(_users.SelectMany(u => u.UserClaims).AsQueryable());
-            repository.All<UserRole>().Returns(_users.SelectMany(u => u.UserRoles).AsQueryable());
+            repository.All<User>().Returns(_users.BuildMock());
+            repository.All<Role>().Returns(_roles.BuildMock());
+            repository.All<Claim>().Returns(_claims.BuildMock());
+            repository.All<UserClaim>().Returns(_users.SelectMany(u => u.UserClaims).BuildMock());
+            repository.All<UserRole>().Returns(_users.SelectMany(u => u.UserRoles).BuildMock());
         }
 
         private static void ConfigureMethodRemove()
@@ -73,6 +78,41 @@ namespace AuthenticationManager.Tests.UnitTests
                 .Do(f => Remove(f.ArgAt<Role>(0)));
             repository.When(r => r.Remove<Claim>(Arg.Any<Claim>()))
                 .Do(f => Remove(f.ArgAt<Claim>(0)));
+        }
+
+        private static Task AddRange<T>(ICollection<T> values)
+        {
+            if (typeof(T) == typeof(User))
+            {
+                _users.AddRange(values as ICollection<User>);
+            }
+            else if (typeof(T) == typeof(Role))
+            {
+                _roles.AddRange(values as ICollection<Role>);
+            }
+            else if (typeof(T) == typeof(Claim))
+            {
+                _claims.AddRange(values as ICollection<Claim>);
+            }
+            else if (typeof(T) == typeof(UserClaim))
+            {
+                var userClaims = values as ICollection<UserClaim>;
+
+                foreach (var userClaim in userClaims)
+                {
+                    userClaim.ClaimId = userClaim.Claim.Id;
+                    userClaim.UserId = userClaim.User.Id;
+                    
+                    var user = FindByGuid<User>(userClaim.User.Id);
+
+                    if (user != null)
+                    {
+                        user.UserClaims.Add(userClaim);
+                    }
+                }
+            }
+
+            return Task.CompletedTask;
         }
 
         private static void Remove<T>(T entity)
@@ -155,8 +195,12 @@ namespace AuthenticationManager.Tests.UnitTests
 
         private static async Task ParseUsersJson()
         {
+            JsonSerializerOptions jsonSerializerOptions = new JsonSerializerOptions() {
+                ReferenceHandler = ReferenceHandler.Preserve
+            };
+
             Stream usersJsonStream = File.Open("users.json", FileMode.Open);
-            _users = await JsonSerializer.DeserializeAsync<List<User>>(usersJsonStream);
+            _users = await JsonSerializer.DeserializeAsync<List<User>>(usersJsonStream, jsonSerializerOptions);
         }
 
         private static void ParseRolesFromUsers()

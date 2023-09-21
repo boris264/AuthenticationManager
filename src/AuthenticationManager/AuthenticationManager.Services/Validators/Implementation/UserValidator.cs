@@ -1,5 +1,4 @@
-﻿using System;
-using AuthenticationManager.Data.Models;
+﻿using AuthenticationManager.Data.Models;
 using AuthenticationManager.Services.Common;
 using AuthenticationManager.Services.Interfaces;
 using AuthenticationManager.Services.Options.User;
@@ -26,7 +25,19 @@ namespace AuthenticationManager.Services.Implementation
         {
             OperationResult operationResult = new();
 
+            if (user == null)
+            {
+                operationResult.Invalid("User cannot be null!");
+                return operationResult;
+            }
+
             string username = user.Username;
+
+            if (string.IsNullOrEmpty(username))
+            {
+                operationResult.Invalid("Username is empty!");
+                return operationResult;
+            }
 
             if (!CheckUsernameLength(username))
             {
