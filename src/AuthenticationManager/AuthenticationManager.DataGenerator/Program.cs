@@ -31,6 +31,7 @@ namespace AuthenticationManager.DataGenerator
             {
                 DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault,
                 WriteIndented = true,
+                ReferenceHandler = ReferenceHandler.Preserve
             };
 
             try
@@ -90,6 +91,7 @@ namespace AuthenticationManager.DataGenerator
                         { 
                             Id = Guid.NewGuid(), Name = "Username", Value = user.Username 
                         },
+                        User = user,
                         UserId = user.Id,
                         ClaimId = default
                     },
@@ -99,6 +101,7 @@ namespace AuthenticationManager.DataGenerator
                         { 
                             Id = Guid.NewGuid(), Name = "Email", Value = user.Email 
                         },
+                        User = user,
                         UserId = user.Id,
                         ClaimId = default
                     }
@@ -109,7 +112,8 @@ namespace AuthenticationManager.DataGenerator
                     new UserRole() {
                         Role = random.Next(10) < 2 ? administratorRole : userRole,
                         UserId = user.Id,
-                        RoleId = default
+                        RoleId = default,
+                        User = user,
                     },
                 };
 
