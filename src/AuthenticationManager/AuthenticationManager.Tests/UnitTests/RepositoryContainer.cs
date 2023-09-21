@@ -33,6 +33,7 @@ namespace AuthenticationManager.Tests.UnitTests
             ConfigureMethodAll();
             ConfigureMethodAdd();
             ConfigureMethodFindByGuid();
+            ConfigureMethodRemove();
 
             repository.SaveChangesAsync().Returns(1);
         }
@@ -62,6 +63,33 @@ namespace AuthenticationManager.Tests.UnitTests
             repository.All<Claim>().Returns(_claims.AsQueryable());
             repository.All<UserClaim>().Returns(_users.SelectMany(u => u.UserClaims).AsQueryable());
             repository.All<UserRole>().Returns(_users.SelectMany(u => u.UserRoles).AsQueryable());
+        }
+
+        private static void ConfigureMethodRemove()
+        {
+            repository.When(r => r.Remove<User>(Arg.Any<User>()))
+                .Do(f => Remove(f.ArgAt<User>(0)));
+            repository.When(r => r.Remove<Role>(Arg.Any<Role>()))
+                .Do(f => Remove(f.ArgAt<Role>(0)));
+            repository.When(r => r.Remove<Claim>(Arg.Any<Claim>()))
+                .Do(f => Remove(f.ArgAt<Claim>(0)));
+        }
+
+        private static void Remove<T>(T entity)
+            where T : class
+        {
+            if (typeof(T) == typeof(User))
+            {
+                _users.Remove(entity as User);
+            }
+            else if (typeof(T) == typeof(Role))
+            {
+                _roles.Remove(entity as Role);
+            }
+            else if (typeof(T) == typeof(Claim))
+            {
+                _claims.Remove(entity as Claim);
+            }
         }
 
         private static T FindByGuid<T>(Guid guid)
