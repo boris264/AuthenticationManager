@@ -23,7 +23,7 @@ namespace AuthenticationManager.Tests.UnitTests
 
         private static List<Claim> _claims = new List<Claim>();
 
-        public static IAuthManagerRepository repository; 
+        public static IAuthManagerRepository repository;
 
         [OneTimeSetUp]
         public static async Task Setup()
@@ -68,8 +68,22 @@ namespace AuthenticationManager.Tests.UnitTests
             repository.All<User>().Returns(_users.BuildMock());
             repository.All<Role>().Returns(_roles.BuildMock());
             repository.All<Claim>().Returns(_claims.BuildMock());
-            repository.All<UserClaim>().Returns(_users.SelectMany(u => u.UserClaims).BuildMock());
-            repository.All<UserRole>().Returns(_users.SelectMany(u => u.UserRoles).BuildMock());
+            repository.All<UserClaim>().Returns(_users.SelectMany(u => u.UserClaims)
+                .Select(uc => new UserClaim()
+                {
+                    ClaimId = uc.Claim.Id,
+                    UserId = uc.User.Id,
+                    Claim = uc.Claim,
+                    User = uc.User
+                }).BuildMock());
+            repository.All<UserRole>().Returns(_users.SelectMany(u => u.UserRoles)
+                .Select(ur => new UserRole()
+                {
+                    RoleId = ur.Role.Id,
+                    UserId = ur.User.Id,
+                    Role = ur.Role,
+                    User = ur.User
+                }).BuildMock());
         }
 
         private static void ConfigureMethodRemove()
@@ -106,7 +120,7 @@ namespace AuthenticationManager.Tests.UnitTests
                 {
                     userClaim.ClaimId = userClaim.Claim.Id;
                     userClaim.UserId = userClaim.User.Id;
-                    
+
                     var user = FindByGuid<User>(userClaim.User.Id);
 
                     if (user != null)
@@ -143,7 +157,7 @@ namespace AuthenticationManager.Tests.UnitTests
                 var uc = user.UserClaims
                     .Where(uc => uc.Claim.Id == userClaim.Claim.Id)
                     .FirstOrDefault();
-                
+
                 user.UserClaims.Remove(uc);
             }
             else if (typeof(T) == typeof(UserRole))
@@ -151,11 +165,11 @@ namespace AuthenticationManager.Tests.UnitTests
                 var userRole = entity as UserRole;
 
                 var user = FindByGuid<User>(userRole.User.Id);
-                
+
                 var ur = user.UserRoles
                     .Where(uc => uc.Role.Id == userRole.Role.Id)
                     .FirstOrDefault();
-                
+
                 user.UserRoles.Remove(ur);
             }
         }
@@ -185,9 +199,12 @@ namespace AuthenticationManager.Tests.UnitTests
         }
         private static Task AddUserRole(UserRole userRole)
         {
-            var user = _users.Where(u => u.Id == userRole.UserId)
+            var user = _users.Where(u => u.Id == userRole.User.Id)
                 .FirstOrDefault();
-            
+                
+            userRole.RoleId = userRole.Role.Id;
+            userRole.UserId = userRole.User.Id;
+
             if (user != null)
             {
                 user.UserRoles.Add(userRole);
@@ -203,7 +220,7 @@ namespace AuthenticationManager.Tests.UnitTests
 
             userClaim.ClaimId = userClaim.Claim.Id;
             userClaim.UserId = userClaim.User.Id;
-            
+
             if (user != null)
             {
                 user.UserClaims.Add(userClaim);
@@ -226,7 +243,8 @@ namespace AuthenticationManager.Tests.UnitTests
 
         private static async Task ParseUsersJson()
         {
-            JsonSerializerOptions jsonSerializerOptions = new JsonSerializerOptions() {
+            JsonSerializerOptions jsonSerializerOptions = new JsonSerializerOptions()
+            {
                 ReferenceHandler = ReferenceHandler.Preserve
             };
 
