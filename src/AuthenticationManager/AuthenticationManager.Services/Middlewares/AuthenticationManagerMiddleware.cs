@@ -41,7 +41,7 @@ namespace AuthenticationManager.Services.Middlewares
                     List<Data.Models.Claim> claims = JsonSerializer
                         .Deserialize<List<Data.Models.Claim>>(claimsFromCache);
                     
-                    ClaimsIdentity loggedInUserIdentity = new ClaimsIdentity();
+                    ClaimsIdentity loggedInUserIdentity = new ClaimsIdentity("AuthManagerCookie");
 
                     loggedInUserIdentity.AddClaims(claims.Select(c => new Claim(c.Name, c.Value)));
 
