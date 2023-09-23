@@ -30,7 +30,7 @@ namespace AuthenticationManager.Tests.UnitTests
         {
             repository = Substitute.For<IAuthManagerRepository>();
             await ParseUsersJson();
-            // HashUsersPasswords();
+            HashUsersPasswords();
             ParseRolesFromUsers();
             ParseClaimsFromUsers();
             ConfigureMethodAll();
