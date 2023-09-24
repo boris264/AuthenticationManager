@@ -139,6 +139,12 @@ namespace AuthenticationManager.Services.UserServices.Implementation
             return authenticationResult;
         }
 
+        public void SignOut()
+        {
+            ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(new ClaimsIdentity());
+            _httpContextAccessor.HttpContext.User = claimsPrincipal;
+        }
+
         private async Task SetUser(TUser user)
         {
             if (user != null)

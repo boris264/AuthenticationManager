@@ -227,5 +227,15 @@ namespace AuthenticationManager.Tests.UnitTests
 
             Assert.That(_httpContextAccessor.HttpContext.User.Claims.Count(), Is.EqualTo(2));
         }
+
+        [Test]
+        public async Task CheckSignOutSetsUserIsAuthenticatedToFalse()
+        {
+            var loginResult = await _userManager.SignInAsync("Latime", "qbkgkybh");
+            Assert.That(_httpContextAccessor.HttpContext.User.Identity.IsAuthenticated);
+
+            _userManager.SignOut();
+            Assert.That(!_httpContextAccessor.HttpContext.User.Identity.IsAuthenticated);
+        }
     }
 }

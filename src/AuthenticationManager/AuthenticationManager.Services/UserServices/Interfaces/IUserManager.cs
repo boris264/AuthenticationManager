@@ -14,5 +14,7 @@ namespace AuthenticationManager.Services.UserServices.Interfaces
         Task<AuthenticationResult> SignInAsync(string username, string password, bool rememberMe = false);
 
         Task<AuthenticationResult> RegisterAsync(TUser user);
+
+        public void SignOut();
     }
 }
