@@ -66,33 +66,23 @@ namespace AuthenticationManager.Tests.UnitTests
                     }
                     return Task.CompletedTask;
                 });
-            
+
             _cache.DeleteAsync(Arg.Any<string>())
-                .Returns(callInfo => 
+                .Returns(callInfo =>
                 {
                     _data.Remove(callInfo.ArgAt<string>(0));
                     return Task.CompletedTask;
                 });
-
-            _sessionCookieOptions = new SessionCookieOptions();
-
-            _authenticationManagerMiddleware = new AuthenticationManagerMiddleware(context =>
-            {
-                return Task.CompletedTask;
-            },
-            Options.Create(_sessionCookieOptions));
-
-            _httpContext = new DefaultHttpContext();
         }
 
-        [TearDown]
-        public void TearDown()
+        [SetUp]
+        public void SetUp()
         {
             _authenticationManagerMiddleware = new AuthenticationManagerMiddleware(context =>
-            {
-                return Task.CompletedTask;
-            },
-            Options.Create(_sessionCookieOptions));
+                {
+                    return Task.CompletedTask;
+                }, Options.Create(_sessionCookieOptions));
+
             _httpContext = new DefaultHttpContext();
             _sessionCookieOptions = new SessionCookieOptions();
             _data = new Dictionary<string, Dictionary<string, byte[]>>();
