@@ -47,6 +47,11 @@ namespace AuthenticationManager.Services.Cache.Distributed
             await GetDb().HashSetAsync(key, entries.Select(e => new HashEntry(e.Key, e.Value)).ToArray());
         }
 
+        public async Task DeleteAsync(string key)
+        {
+            await GetDb().KeyDeleteAsync(key);
+        }
+
         private IDatabase GetDb()
         {
             return _connectionMultiplexer.GetDatabase();

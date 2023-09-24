@@ -12,5 +12,7 @@ namespace AuthenticationManager.Services.Cache.Distributed
         public Task SetFieldAsync(string key, string field, byte[] data);
 
         public Task SetFieldsAsync(string key, Dictionary<string, byte[]> entries);
+
+        public Task DeleteAsync(string key);
     }
 }

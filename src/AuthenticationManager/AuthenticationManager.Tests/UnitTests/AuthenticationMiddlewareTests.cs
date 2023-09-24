@@ -66,6 +66,13 @@ namespace AuthenticationManager.Tests.UnitTests
                     }
                     return Task.CompletedTask;
                 });
+            
+            _cache.DeleteAsync(Arg.Any<string>())
+                .Returns(callInfo => 
+                {
+                    _data.Remove(callInfo.ArgAt<string>(0));
+                    return Task.CompletedTask;
+                });
 
             _sessionCookieOptions = new SessionCookieOptions();
 
@@ -81,6 +88,11 @@ namespace AuthenticationManager.Tests.UnitTests
         [TearDown]
         public void TearDown()
         {
+            _authenticationManagerMiddleware = new AuthenticationManagerMiddleware(context =>
+            {
+                return Task.CompletedTask;
+            },
+            Options.Create(_sessionCookieOptions));
             _httpContext = new DefaultHttpContext();
             _sessionCookieOptions = new SessionCookieOptions();
             _data = new Dictionary<string, Dictionary<string, byte[]>>();
@@ -147,6 +159,38 @@ namespace AuthenticationManager.Tests.UnitTests
             Assert.That(claimsFromCache.Count == 2);
             Assert.That(claimsFromCache.Any(c => c.Name == "claim1"));
             Assert.That(claimsFromCache.Any(c => c.Name == "claim2"));
+        }
+
+        [Test]
+        public async Task CheckCachedDataForUserGetsRemovedAfterSignOut()
+        {
+            // Used to simulate logout.
+            _authenticationManagerMiddleware = new AuthenticationManagerMiddleware(context =>
+            {
+                _httpContext.User = new ClaimsPrincipal(new ClaimsIdentity());
+                return Task.CompletedTask;
+            },
+            Options.Create(_sessionCookieOptions));
+
+            var sessionId = Guid.NewGuid();
+            _httpContext.Request.Headers["Cookie"] = $"{_sessionCookieOptions.Name}={sessionId}";
+
+            string claimsJson = JsonSerializer
+                .Serialize(new List<Data.Models.Claim>()
+                {
+                    new Data.Models.Claim() { Name = "claim1", Value = "test1"},
+                    new Data.Models.Claim() { Name = "claim2", Value = "test2"},
+                });
+
+            await _cache.SetFieldAsync(sessionId.ToString(), "Claims", Encoding.UTF8.GetBytes(claimsJson));
+
+            await _authenticationManagerMiddleware.InvokeAsync(_httpContext, _cache);
+
+            var claimsFromCache = await _cache.GetFieldAsync(sessionId.ToString(), "Claims");
+
+            Assert.That(claimsFromCache, Is.Null);
+            Assert.That(_httpContext.User.Identity, Is.Not.Null);
+            Assert.That(!_httpContext.User.Identity.IsAuthenticated);
         }
     }
 }

@@ -52,6 +52,7 @@ namespace AuthenticationManager.Services.Middlewares
             {
                 userSessionId = Guid.NewGuid().ToString();
                 context.Response.Cookies.Append(_sessionCookieOptions.Name, userSessionId, _sessionCookieOptions);
+                context.User = new ClaimsPrincipal(new ClaimsIdentity());
             }
 
             await _next(context);
@@ -72,6 +73,13 @@ namespace AuthenticationManager.Services.Middlewares
                     {
                         await cache.SetFieldAsync(userSessionId, _cacheClaimsField, ToByteArr(claimsJson));
                     }
+                }
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(context.Request.Cookies[_sessionCookieOptions.Name]))
+                {
+                    await cache.DeleteAsync(userSessionId);
                 }
             }
         }

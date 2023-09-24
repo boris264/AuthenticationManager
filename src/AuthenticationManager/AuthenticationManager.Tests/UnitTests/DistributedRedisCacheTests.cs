@@ -108,6 +108,17 @@ namespace AuthenticationManager.Tests.UnitTests
             Assert.That(result, Is.Null);
         }
 
+        [Test]
+        public async Task CheckDeleteKeyRemovesKey()
+        {
+            await Set("testKey", "field", ToByteArr("testDataa"));
+
+            await _cache.DeleteAsync("testKey");
+            var result = await _cache.GetAllFieldsAsync("testKey");
+
+            Assert.That(result.Count == 0);
+        }
+
         private async Task Set(string key, string field, byte[] data)
         {
             await _connectionMultiplexer.GetDatabase()
